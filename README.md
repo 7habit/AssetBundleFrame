@@ -31,6 +31,7 @@
    - 在编辑器菜单下点击【AssetBundle/BuildBundles】
    - 注意：生成的AB包与【BuildSetting】菜单中的目标平台一致，更换平台时需要重新Build
 4. 获取的资源对象
+   - `using AssetBundleFrame;`
    - 通过本地AB包获取对象：AssetBundleLoad.Instance.LoadAssetByFile("Cube", Vector3.one, Quaternion.identity, transform);
    - 通过网络AB包获取对象：StartCoroutine(AssetBundleLoad.Instance.LoadAssetByWeb("2/Cube1", Vector3.one, Quaternion.identity, transform));
    - 参数：原始资源文件夹下的相对路径，初始位置，初始旋转，父对象Transfrom
