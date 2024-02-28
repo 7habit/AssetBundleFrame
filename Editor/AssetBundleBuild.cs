@@ -9,94 +9,94 @@ namespace AssetBundleFrame
         [MenuItem("AssetBundle/BuildBundles")]
         public static void AssetBundleAutoBuildMacOs()
         {
-            //Çå¿Õµ±Ç°ËùÓĞµÄBundleÃû³Æ
+            //æ¸…ç©ºå½“å‰æ‰€æœ‰çš„Bundleåç§°
             ClearAssetBundleName();
-            //ÉèÖÃ×ÊÔ´ÎÄ¼şÏÂµÄÎÄ¼şµÄBundleÃû³Æ
+            //è®¾ç½®èµ„æºæ–‡ä»¶ä¸‹çš„æ–‡ä»¶çš„Bundleåç§°
             SetAssetBundlesName(AssetBundleDefine.ResPath);
-            //´ò°ü
+            //æ‰“åŒ…
             BeginAssetBundleBuild();
-            //Çå¿Õµ±Ç°ËùÓĞµÄBundleÃû³Æ
+            //æ¸…ç©ºå½“å‰æ‰€æœ‰çš„Bundleåç§°
             ClearAssetBundleName();
-            //Ë¢ĞÂ
+            //åˆ·æ–°
             AssetDatabase.Refresh();
         }
         
         /// <summary>
-        /// Ò»¼üÉú³ÉËùÓĞÓĞABÃû³ÆµÄ×ÊÔ´µÄAB°ü
+        /// ä¸€é”®ç”Ÿæˆæ‰€æœ‰æœ‰ABåç§°çš„èµ„æºçš„ABåŒ…
         /// </summary>
         private static void BeginAssetBundleBuild()
         {
-            //´ò°ü
+            //æ‰“åŒ…
             BuildPipeline.BuildAssetBundles(
-                AssetBundleDefine.AbPath, //Êä³öÂ·¾¶
-                //Ñ¹ËõÑ¡Ïî£ºNone-°üĞ¡¼ÓÔØÂı£¬ChunkBasedCompression-°üÖĞµÈ¼ÓÔØ¿ì£¬UncompressedAssetBundle-²»Ñ¹Ëõ¼ÓÔØ¿ì
+                AssetBundleDefine.AbPath, //è¾“å‡ºè·¯å¾„
+                //å‹ç¼©é€‰é¡¹ï¼šNone-åŒ…å°åŠ è½½æ…¢ï¼ŒChunkBasedCompression-åŒ…ä¸­ç­‰åŠ è½½å¿«ï¼ŒUncompressedAssetBundle-ä¸å‹ç¼©åŠ è½½å¿«
                 BuildAssetBundleOptions.ChunkBasedCompression, 
-                EditorUserBuildSettings.activeBuildTarget); //¸ù¾İBuildSettingÖĞµÄÑ¡ÏîÀ´Ñ¡Ôñ¶ÔÓ¦µÄ¹¹½¨Æ½Ì¨
+                EditorUserBuildSettings.activeBuildTarget); //æ ¹æ®BuildSettingä¸­çš„é€‰é¡¹æ¥é€‰æ‹©å¯¹åº”çš„æ„å»ºå¹³å°
         }
 
         /// <summary>
-        /// Çå¿Õµ±Ç°ËùÓĞµÄBundleÃû³Æ
+        /// æ¸…ç©ºå½“å‰æ‰€æœ‰çš„Bundleåç§°
         /// </summary>
         private static void ClearAssetBundleName()
         {
-            //»ñÈ¡ËùÓĞµÄBundleÃû³Æ
+            //è·å–æ‰€æœ‰çš„Bundleåç§°
             string[] bundleNames = AssetDatabase.GetAllAssetBundleNames();
-            //±éÀúÉ¾³ıABÃû³Æ
+            //éå†åˆ é™¤ABåç§°
             for (int i = 0; i < bundleNames.Length; i++)
             {
-                //É¾³ıBundleÃû³Æ
+                //åˆ é™¤Bundleåç§°
                 AssetDatabase.RemoveAssetBundleName(bundleNames[i], true);
             }
         }
 
         /// <summary>
-        /// ÉèÖÃ×ÊÔ´ÎÄ¼şÏÂµÄÎÄ¼şµÄBundleÃû³Æ
+        /// è®¾ç½®èµ„æºæ–‡ä»¶ä¸‹çš„æ–‡ä»¶çš„Bundleåç§°
         /// </summary>
-        /// <param name="path">ĞèÒªÉèÖÃµÄ×ÊÔ´ÎÄ¼ş¼ĞÂ·¾¶</param>
+        /// <param name="path">éœ€è¦è®¾ç½®çš„èµ„æºæ–‡ä»¶å¤¹è·¯å¾„</param>
         private static void SetAssetBundlesName(string path)
         {
-            //»ñÈ¡×ÊÔ´ÎÄ¼ş¼Ğ
+            //è·å–èµ„æºæ–‡ä»¶å¤¹
             DirectoryInfo rootInfo = new DirectoryInfo(path);
-            //»ñÈ¡×ÓÎÄ¼ş
+            //è·å–å­æ–‡ä»¶
             FileSystemInfo[] fileInfo = rootInfo.GetFileSystemInfos();
-            //±éÀú×ÓÎÄ¼ş
+            //éå†å­æ–‡ä»¶
             for (int i = 0; i < fileInfo.Length; i++)
             {
-                //Èç¹ûÊÇÎÄ¼ş¼Ğ
+                //å¦‚æœæ˜¯æ–‡ä»¶å¤¹
                 if (fileInfo[i] is DirectoryInfo)
                 {
-                    //µİ¹é½âÎö
+                    //é€’å½’è§£æ
                     SetAssetBundlesName(fileInfo[i].FullName);
                 }
-                //ÅÅ³ımetaÎÄ¼ş
+                //æ’é™¤metaæ–‡ä»¶
                 else if (!fileInfo[i].Name.EndsWith(".meta"))
                 {
-                    //ÉèÖÃµ¥¸ö×ÊÔ´µÄBundleÃû³Æ
+                    //è®¾ç½®å•ä¸ªèµ„æºçš„Bundleåç§°
                     SetAssetBundleName(fileInfo[i].FullName);
                 }
             }
         }
 
         /// <summary>
-        /// ÉèÖÃµ¥¸ö×ÊÔ´µÄBundleÃû³Æ
+        /// è®¾ç½®å•ä¸ªèµ„æºçš„Bundleåç§°
         /// </summary>
-        /// <param name="path">×ÊÔ´Â·¾¶</param>
+        /// <param name="path">èµ„æºè·¯å¾„</param>
         private static void SetAssetBundleName(string path)
         {
-            //ÄÃµ½×ÊÔ´µ¼ÈëÆ÷µÄÂ·¾¶
+            //æ‹¿åˆ°èµ„æºå¯¼å…¥å™¨çš„è·¯å¾„
             string importerPath = "Assets/" + path.Substring(Application.dataPath.Length + 1);
-            //´´½¨×ÊÔ´µ¼ÈëÆ÷
+            //åˆ›å»ºèµ„æºå¯¼å…¥å™¨
             AssetImporter importer = AssetImporter.GetAtPath(importerPath);
-            //Éú³ÉbundleÃû³Æ
+            //ç”Ÿæˆbundleåç§°
             if (importer != null)
             {
-                //½âÎöbundleName
-                //È¥³ıÇ°×º
+                //è§£æbundleName
+                //å»é™¤å‰ç¼€
                 string bundleName = path.Substring(path.LastIndexOf('/') + 1);
-                bundleName = path.Substring(path.LastIndexOf('\\') + 1);
-                //È¥³ıºó×º
+                bundleName = bundleName.Substring(bundleName.LastIndexOf('\\') + 1);
+                //å»é™¤åç¼€
                 bundleName = bundleName.Remove(bundleName.LastIndexOf('.'));
-                //ÉèÖÃbundleName--»á×Ô¶¯×ªĞ¡Ğ´
+                //è®¾ç½®bundleName--ä¼šè‡ªåŠ¨è½¬å°å†™
                 importer.assetBundleName = bundleName;
             }
         }
